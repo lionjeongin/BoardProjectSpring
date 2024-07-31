@@ -33,10 +33,12 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
             form.setCode("AccountExpired.Login");
         } else if (exception instanceof LockedException) { // 사용자 계정이 잠겨있는 경우
             form.setCode("Locked.Login");
+        } else {
+            form.setCode("Fail.Login");
         }
 
+        form.setDefaultMessage(exception.getMessage());
 
-        System.out.println(exception);
 
         form.setSuccess(false);
         session.setAttribute("requestLogin", form);
