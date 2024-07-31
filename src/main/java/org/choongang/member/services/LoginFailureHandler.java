@@ -30,7 +30,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         } else if (exception instanceof CredentialsExpiredException) { // 비밀번호 유효기간 만료
             form.setCode("CredentialsExpired.Login");
         } else if (exception instanceof AccountExpiredException) { // 사용자 계정 유효기간 만료
-            form.setCode("AccountExpired.Login")
+            form.setCode("AccountExpired.Login");
         } else if (exception instanceof LockedException) { // 사용자 계정이 잠겨있는 경우
             form.setCode("Locked.Login");
         }
