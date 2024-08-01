@@ -15,7 +15,7 @@ public class MemberAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
         /**
          * 회원 전용 페이지로 접근한 경우 - /mypage -> 로그인 페이지 이동
-         * 관리자 페이지로 접근한 경우 - 응답 코드 401, 에러 페이지 출력
+         * 관리자 페이지로 접근한 경우 - 응답 코드 401, 에러페이지 출력
          */
 
         String uri = request.getRequestURI();
@@ -28,8 +28,7 @@ public class MemberAuthenticationEntryPoint implements AuthenticationEntryPoint 
                 redirectUrl += "?" + qs;
             }
 
-            response.sendRedirect(request.getContextPath() +
-                    "/member/login?redirectUrl=" + redirectUrl);
+            response.sendRedirect(request.getContextPath() + "/member/login?redirectUrl=" + redirectUrl);
         }
     }
 }

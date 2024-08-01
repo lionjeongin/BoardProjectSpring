@@ -43,14 +43,14 @@ public class SecurityConfig {
             c.requestMatchers("/mypage/**").authenticated() // 회원 전용
                     .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                     .anyRequest().permitAll();
-
-
         });
 
         http.exceptionHandling(c -> {
             c.authenticationEntryPoint(new MemberAuthenticationEntryPoint());
         });
         /* 인가(접근 통제) 설정 E */
+
+
 
         return http.build();
     }
