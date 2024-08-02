@@ -1,9 +1,6 @@
 package org.choongang.file.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor @AllArgsConstructor
 public class FileInfo extends BaseMemberEntity {
     @Id @GeneratedValue
-    private Long seq; // 서버에 업로드될 파일 이름 - seq.확장자
+    private Long seq; // 서버에 업로드될 파일 이름  - seq.확장자
 
     @Column(length=45, nullable = false)
     private String gid = UUID.randomUUID().toString(); // 그룹 ID
@@ -30,10 +27,16 @@ public class FileInfo extends BaseMemberEntity {
     private String fileName;
 
     @Column(length=30)
-    private String extention; // 파일 확장자
+    private String extension; // 파일 확장자
 
-    @Column(length = 80)
+    @Column(length=80)
     private String contentType;
 
     private boolean done; // 그룹 작업 완료 여부
+
+    @Transient
+    private String fileUrl; // 파일 접근 URL
+
+    @Transient
+    private String filePath; // 파일 업로드 경로
 }
