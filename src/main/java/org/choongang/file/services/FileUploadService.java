@@ -27,13 +27,13 @@ public class FileUploadService {
         /**
          * 1. 파일 정보 저장
          * 2. 파일을 서버로 이동
-         * 3. 이미지면 썸네일 생성
+         * 3. 이미지이면 썸네일 생성
          * 4. 업로드한 파일목록 반환
          */
 
         gid = StringUtils.hasText(gid) ? gid : UUID.randomUUID().toString();
 
-        List<FileInfo> uploadFiles = new ArrayList<>();
+        List<FileInfo> uploadedFiles = new ArrayList<>();
 
         // 1. 파일 정보 저장
         for (MultipartFile file : files) {
@@ -45,7 +45,7 @@ public class FileUploadService {
                     .gid(gid)
                     .location(location)
                     .fileName(fileName)
-                    .extention(extension)
+                    .extension(extension)
                     .contentType(contentType)
                     .build();
 
@@ -62,7 +62,8 @@ public class FileUploadService {
             String uploadPath = uploadDir + "/" + seq + extension;
             try {
                 file.transferTo(new File(uploadPath));
-                uploadFiles.add(fileInfo); // 업로드 성공 파일 정보
+
+                uploadedFiles.add(fileInfo); // 업로드 성공 파일 정보
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -72,6 +73,6 @@ public class FileUploadService {
             }
         }
 
-        return uploadFiles;
+        return uploadedFiles;
     }
 }
