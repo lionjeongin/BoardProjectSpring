@@ -9,7 +9,45 @@ const fileManager = {
     *
     */
     upload(files, gid, location) {
+        try {
+            if (!files || files.length == 0) {
+                throw new Error("파일을 선택 하세요.");
+            }
 
+            if (!gid || !gid.trim()) {
+                throw new Error("필수 항목 누락 입니다(gid).");
+            }
+
+            const formData = new FormData();
+            formData.append("gid", gid.trim());
+
+            for (const file of files) {
+                formData.append("file", file);
+            }
+
+            if (location && location.trim()) {
+                formData.append("location", location.trim());
+            }
+
+            const { ajaxLoad } = commonLib;
+
+            ajaxLoad('/file/upload', 'POST', formData)
+                .then(res => {
+                    if (!res.success) {
+                        alert(res.message);
+                        return;
+                    }
+                    // 파일 업로드 후 처리는 다양, fileUploadCallback을 직접 상황에 맞게 정의 처리
+                    if (typeof parent.fileUploadCallback === 'function') {
+                        parent.fileUploadCallback(res.data);
+                    }
+                })
+                .catch(err => alert(err.message));
+
+        } catch (e) {
+            console.error(e);
+            alert(e.message);
+        }
     },
     /**
     * 파일 삭제
@@ -55,6 +93,7 @@ window.addEventListener("DOMContentLoaded", function() {
     fileEl.addEventListener("change", function(e) {
         const files = e.target.files;
         fileManager.upload(files, fileEl.gid, fileEl.location);
+
     });
 
 });
