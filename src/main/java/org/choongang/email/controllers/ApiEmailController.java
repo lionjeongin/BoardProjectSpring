@@ -5,7 +5,7 @@ import org.choongang.global.rests.JSONData;
 import org.choongang.email.service.EmailVerifyService;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+//@RestController
 @RequestMapping("/api/email")
 @RequiredArgsConstructor
 public class ApiEmailController {

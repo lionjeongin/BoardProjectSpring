@@ -2,12 +2,11 @@ package org.choongang.email.service;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class EmailVerifyService {
     private final EmailSendService sendService;
